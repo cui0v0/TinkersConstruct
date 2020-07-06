@@ -1,19 +1,19 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:blackstone",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 250,
+      "miningSpeed": 6.0,
+      "harvestLevel": 1,
+      "attack": 1.0
     },
     {
       "id": "tconstruct:handle",
       "durability": 0,
       "durabilityMultiplier": 1.0,
       "miningSpeedMultiplier": 1.0,
-      "attackSpeedMultiplier": 1.0
+      "attackSpeedMultiplier": 1.1
     },
     {
       "id": "tconstruct:extra",

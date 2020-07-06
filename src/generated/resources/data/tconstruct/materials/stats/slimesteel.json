@@ -1,12 +1,12 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:slimesteel",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 640,
+      "miningSpeed": 6.0,
+      "harvestLevel": 3,
+      "attack": 3.0
     },
     {
       "id": "tconstruct:handle",

@@ -1,12 +1,12 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:soulsteel",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 1120,
+      "miningSpeed": 8.0,
+      "harvestLevel": 4,
+      "attack": 4.0
     },
     {
       "id": "tconstruct:handle",

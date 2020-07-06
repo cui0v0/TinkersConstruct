@@ -84,7 +84,7 @@ public final class ToolStatsBuilder {
     double averageHeadDurability = getAverageValue(heads, HeadMaterialStats::getDurability);
     double averageExtraDurability = getAverageValue(extras, ExtraMaterialStats::getDurability);
     double averageHandleDurability = getAverageValue(handles, HandleMaterialStats::getDurability);
-    double averageHandleModifier = getAverageValue(handles, HandleMaterialStats::getModifier, 1);
+    double averageHandleModifier = getAverageValue(handles, HandleMaterialStats::getDurabilityMultiplier, 1);
 
     double durability = (averageHeadDurability + averageExtraDurability) * averageHandleModifier + averageHandleDurability;
 
@@ -94,9 +94,12 @@ public final class ToolStatsBuilder {
 
   public float buildMiningSpeed() {
     double averageHeadSpeed = getAverageValue(heads, HeadMaterialStats::getMiningSpeed);
+    double handleMultiplier = getAverageValue(handles, HandleMaterialStats::getMiningSpeedMultiplier);
 
-    return (float)Math.max(0.1d, averageHeadSpeed);
+    return (float)Math.max(0.1d, averageHeadSpeed * handleMultiplier);
   }
+
+  //TODO: Attack speed from handles
 
   public int buildHarvestLevel() {
     return heads.stream()

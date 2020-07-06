@@ -1,12 +1,12 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:mushwood",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 130,
+      "miningSpeed": 6.0,
+      "harvestLevel": 1,
+      "attack": 0.0
     },
     {
       "id": "tconstruct:handle",

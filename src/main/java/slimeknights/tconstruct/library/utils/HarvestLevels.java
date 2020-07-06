@@ -32,7 +32,7 @@ public class HarvestLevels {
     harvestLevelNames.put(STONE, new StringTextComponent(MaterialRegistry.getMaterial(MaterialIds.stone).getEncodedTextColor()).appendSibling(new TranslationTextComponent("ui.mining_level.stone")));
     harvestLevelNames.put(IRON, new StringTextComponent(MaterialRegistry.getMaterial(MaterialIds.iron).getEncodedTextColor()).appendSibling(new TranslationTextComponent("ui.mining_level.iron")));
     harvestLevelNames.put(DIAMOND, new TranslationTextComponent("ui.mining_level.diamond"));
-    harvestLevelNames.put(OBSIDIAN, new StringTextComponent(MaterialRegistry.getMaterial(MaterialIds.obsidian).getEncodedTextColor()).appendSibling(new TranslationTextComponent("ui.mining_level.obsidian")));
+    harvestLevelNames.put(OBSIDIAN, new StringTextComponent(MaterialRegistry.getMaterial(MaterialIds.knightslime).getEncodedTextColor()).appendSibling(new TranslationTextComponent("ui.mining_level.obsidian")));
     harvestLevelNames.put(COBALT, new StringTextComponent(MaterialRegistry.getMaterial(MaterialIds.cobalt).getEncodedTextColor()).appendSibling(new TranslationTextComponent("ui.mining_level.cobalt")));
 
     // custom names via resource pack..

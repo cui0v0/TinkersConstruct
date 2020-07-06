@@ -1,19 +1,19 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:nauhatl",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 350,
+      "miningSpeed": 6.0,
+      "harvestLevel": 3,
+      "attack": 4.0
     },
     {
       "id": "tconstruct:handle",
       "durability": 0,
-      "durabilityMultiplier": 1.0,
+      "durabilityMultiplier": 0.75,
       "miningSpeedMultiplier": 1.0,
-      "attackSpeedMultiplier": 1.0
+      "attackSpeedMultiplier": 1.2
     },
     {
       "id": "tconstruct:extra",

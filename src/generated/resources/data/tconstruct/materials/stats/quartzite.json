@@ -1,19 +1,19 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:quartzite",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 400,
+      "miningSpeed": 6.0,
+      "harvestLevel": 1,
+      "attack": 3.0
     },
     {
       "id": "tconstruct:handle",
       "durability": 0,
-      "durabilityMultiplier": 1.0,
+      "durabilityMultiplier": 1.2,
       "miningSpeedMultiplier": 1.0,
-      "attackSpeedMultiplier": 1.0
+      "attackSpeedMultiplier": 0.8
     },
     {
       "id": "tconstruct:extra",

@@ -1,19 +1,19 @@
 {
-  "materialId": "tconstruct:manyullyn",
+  "materialId": "tconstruct:slimewood",
   "stats": [
     {
       "id": "tconstruct:head",
-      "durability": 1420,
-      "miningSpeed": 14.0,
-      "harvestLevel": 5,
-      "attack": 6.0
+      "durability": 560,
+      "miningSpeed": 4.0,
+      "harvestLevel": 2,
+      "attack": 1.0
     },
     {
       "id": "tconstruct:handle",
       "durability": 0,
-      "durabilityMultiplier": 1.0,
+      "durabilityMultiplier": 1.5,
       "miningSpeedMultiplier": 1.0,
-      "attackSpeedMultiplier": 1.0
+      "attackSpeedMultiplier": 1.3
     },
     {
       "id": "tconstruct:extra",
