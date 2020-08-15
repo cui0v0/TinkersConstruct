@@ -34,70 +34,6 @@ apply plugin: "io.freefair.lombok"
 
 import net.minecraftforge.gradle.common.task.SignJar
 
-repositories {
-    mavenLocal()
-    maven { // Forge
-        name 'ForgeFS'
-        url 'https://files.minecraftforge.net/maven'
-    }
-    maven { // Mantle and JEI
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-    maven { // TOP
-        name 'tterrag maven'
-        url "https://maven.tterrag.com/"
-    }
-    maven { // unofficial backup maven in case official mavens go down
-        name "ModMaven"
-        url "https://modmaven.k-4u.nl"
-    }
-}
-
-group = 'slimeknights.tconstruct'
-
-// sets version to the slimeKnights version format
-task buildInfo {
-    try {
-        def cmd = "git rev-parse --short HEAD"
-        def proc = cmd.execute()
-        proc.waitFor()
-        if (proc.exitValue() == 0) {
-            ext.revision = proc.text.trim()
-        } else {
-            ext.revision = "GITBORK"
-        }
-    } catch (all) {
-        ext.revision = "gitgud"
-    }
-
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
-    }
-}
-ext.artifact_version = 'NFG'
-if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${mod_version}.${project.buildInfo.buildNum}"
-}
-if (System.getenv().ARTIFACT_VERSION != null) {
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
-}
-
-version = "${minecraft_version}-${artifact_version}"
-
-sourceSets {
-    main {
-        resources {
-            srcDirs = [
-                "$rootDir/src/main/resources",
-                "$rootDir/src/generated/resources"
-            ]
-        }
-    }
-}
-
 minecraft {
     mappings channel: 'snapshot', version: mappings_version
 
@@ -113,6 +49,7 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
 
             mods {
                 tconstruct {
@@ -168,6 +105,7 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
 
             args '--mod', 'tconstruct', '--all', '--output', file('src/generated/resources/')
 
@@ -179,6 +117,70 @@ minecraft {
         }
     }
 }
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = [
+                "$rootDir/src/main/resources",
+                "$rootDir/src/generated/resources"
+            ]
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { // Forge
+        name 'ForgeFS'
+        url 'https://files.minecraftforge.net/maven'
+    }
+    maven { // Mantle and JEI
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+    maven { // unofficial backup maven in case official mavens go down
+        name "ModMaven"
+        url "https://modmaven.k-4u.nl"
+    }
+}
+
+group = 'slimeknights.tconstruct'
+
+// sets version to the slimeKnights version format
+task buildInfo {
+    try {
+        def cmd = "git rev-parse --short HEAD"
+        def proc = cmd.execute()
+        proc.waitFor()
+        if (proc.exitValue() == 0) {
+            ext.revision = proc.text.trim()
+        } else {
+            ext.revision = "GITBORK"
+        }
+    } catch (all) {
+        ext.revision = "gitgud"
+    }
+
+    if (System.getenv().BUILD_NUMBER != null) {
+        ext.buildNum = "${System.getenv().BUILD_NUMBER}"
+    } else {
+        ext.buildNum = "DEV.${project.buildInfo.revision}"
+    }
+}
+ext.artifact_version = 'NFG'
+if (System.getenv().ARTIFACT_VERSION == null) {
+    artifact_version = "${mod_version}.${project.buildInfo.buildNum}"
+}
+if (System.getenv().ARTIFACT_VERSION != null) {
+    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
+}
+
+version = "${minecraft_version}-${artifact_version}"
 
 configurations {
     deployerJars
@@ -246,10 +248,6 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-artifacts {
-    archives sourcesJar
-}
-
 // verify the properties exist.. or initialize.
 if (!project.hasProperty("keystore_location")) // keystore location
     ext.keystore_location = "."
@@ -264,66 +262,3 @@ if (!project.hasProperty("keystore_user_password")) // keystore user pass
     ext.keystore_user_password = ""
 if (System.getenv().KSK_PW != null)
     ext.keystore_user_password = System.getenv().KSK_PW
-
-
-task("uploadJars", dependsOn: "build") {
-
-    description = "uploads JARs"
-
-    if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
-        apply plugin: 'maven'
-        uploadArchives {
-            repositories {
-                if (project.hasProperty("local_maven")) {
-                    mavenDeployer {
-                        repository(url: "file://${local_maven}")
-                    }
-                }
-                if (project.hasProperty("sftp_maven")) {
-                    repositories.mavenDeployer {
-                        configuration = configurations.deployerJars
-                        repository(url: "sftp://${sftp_maven}") {
-                            authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-task signUniversal(type: SignJar, dependsOn: 'jar') {
-    onlyIf {
-        project.hasProperty('jarsigner')
-    }
-
-    def jarsigner = [:]
-
-    if (project.hasProperty('jarsigner'))
-        jarsigner = project.jarsigner
-
-    alias = 'tcon'
-    storePass = jarsigner.storepass
-    keyPass = jarsigner.keypass
-    keyStore = jarsigner.keystore
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
-}
-uploadArchives.dependsOn signUniversal
-build.dependsOn signUniversal
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // todo: remove deobf and sources jar in 1.13
-            artifact jar
-            artifact sourcesJar
-        }
-    }
-
-    repositories {
-        if (project.hasProperty('DEPLOY_DIR')) {
-            maven { url DEPLOY_DIR }
-        }
-    }
-}
