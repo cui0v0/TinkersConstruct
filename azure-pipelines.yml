@@ -23,7 +23,7 @@ steps:
   displayName: Create Release Build
   inputs:
     workingDirectory: ''
-    options: '--build-cache -PCIType=RELEASE'
+    options: '--build-cache -PCIRevision=$(javaprops_mod_version).$(revision) -PCIType=RELEASE'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
@@ -37,7 +37,7 @@ steps:
   displayName: Copy Release build to artifact staging
   inputs:
     sourceFolder: './build/libs/'
-    contents: '*.jar'
+    contents: '*.*'
     targetFolder: $(build.artifactStagingDirectory)
   condition: and(succeeded(), eq(variables['CreateArtifacts'], 'True'))
 
