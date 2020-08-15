@@ -32,7 +32,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "io.freefair.lombok"
 
-import net.minecraftforge.gradle.common.task.SignJar
+version = (hasProperty("CIRevision") ? CIRevision : config.mod_version)
 
 minecraft {
     mappings channel: 'snapshot', version: mappings_version
