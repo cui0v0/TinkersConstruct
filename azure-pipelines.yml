@@ -63,5 +63,3 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: '$(artifactName)'
     publishLocation: 'pipeline'
-
-
