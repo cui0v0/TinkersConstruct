@@ -53,7 +53,7 @@ steps:
   displayName: Copy Release build to artifact staging
   inputs:
     sourceFolder: './build/libs/'
-    contents: 'TConstruct-*.jar'
+    contents: '*.jar'
     targetFolder: $(build.artifactStagingDirectory)
   condition: and(succeeded(), eq(variables['CreateArtifacts'], 'True'))
 
